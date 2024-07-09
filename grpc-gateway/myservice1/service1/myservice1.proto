@@ -1,0 +1,47 @@
+syntax = "proto3";
+package service1;
+option go_package = "my-grpc-gateway/myservice1/service1/";
+import "annotations.proto";
+
+message SimpleMessage {
+  string id = 1;
+  int64 num = 2;
+  string lang = 3;
+  string no = 4;
+  InnerMsg msg = 5;
+}
+
+message InnerMsg {
+  string f1 = 1;
+  string f2 = 2;
+}
+
+service MyService1 {
+  rpc Echo(SimpleMessage) returns (SimpleMessage) {
+    option (google.api.http) = {
+      post: "/v1/echo/{id}"
+      additional_bindings {
+        get: "/v1/echo/{id}/{num}"
+      }
+      additional_bindings {
+        get: "/v1/echo/{id}/{num}/{lang}"
+      }
+    };
+  }
+  rpc EchoBody(SimpleMessage) returns (SimpleMessage) {
+    option (google.api.http) = {
+      post: "/v1/echo_body"
+      body: "*"
+      additional_bindings {
+        put: "/v1/echo_body"
+        body: "msg"
+      }
+    };
+  }
+  rpc EchoDelete(SimpleMessage) returns (SimpleMessage) {
+    option (google.api.http) = {
+      delete: "/v1/echo_delete/{id}"
+    };
+  }
+
+}
