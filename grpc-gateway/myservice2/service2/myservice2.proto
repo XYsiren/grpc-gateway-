@@ -1,0 +1,41 @@
+syntax = "proto3";
+package service2;
+option go_package = "my-grpc-gateway/myservice2/service2/";
+
+
+message SimpleMessage {
+  string id = 1;
+  int64 num = 2;
+  string lang = 3;
+  string no = 4;
+  InnerMsg msg = 5;
+}
+
+message InnerMsg {
+  string f1 = 1;
+  string f2 = 2;
+}
+
+message UploadRequest {
+  int64 size =1;
+  bytes content =2;
+}
+
+message UploadResponse {
+  string path =1;
+}
+
+service MyService2 {
+  rpc Echo(SimpleMessage) returns (SimpleMessage) {
+
+  }
+  rpc EchoBody(SimpleMessage) returns (SimpleMessage) {
+
+  }
+  rpc EchoDelete(SimpleMessage) returns (SimpleMessage) {
+
+  }
+  rpc EchoUpload(stream UploadRequest) returns (UploadResponse) {
+
+  }
+}
