@@ -68,7 +68,7 @@ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest  // 目前最新�
 
 
 
-![img](https://pic4.zhimg.com/80/v2-74a16d5d128926144961eab36a57ebc3_720w.webp)
+![img](images/00.png)
 
 
 
